@@ -76,12 +76,11 @@ class Vampire {
 
   // Returns the total number of vampires that exist
   get totalDescendents() {
-    let total = 1;
+    let total = 0;
     for (let descendent of this.offspring) {
+      total++;
       if (descendent.offspring.length !== 0) {
         total += descendent.totalDescendents;
-      } else {
-        total++;
       }
     }
     return total;
