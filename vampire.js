@@ -46,20 +46,32 @@ class Vampire {
 
   // Returns the vampire object with that name, or null if no vampire exists with that name
   vampireWithName(name) {
-    // console.log(this.offspring.map(x => x.name));
-
+    // console.log('searching for ', name);
     if (this.name === name) {
       return this;
+    } 
+    else if (this.offspring.length === 0) {
+      // console.log(`'${this.name}' has no child`);
+      return null;
     }
+
+    let target = null;
 
     for (let child of this.offspring) {
       if (child.name === name) {
+        // console.log(`found ${child.name}`);
         return child;
+      } else {
+        // console.log(`'${this.name}' has no child named '${name}'`);
+        target = child.vampireWithName(name);
+        if (target) {
+          return target;
+        }
       }
-      return child.vampireWithName(name);
     }
 
-    return null;
+
+    return target;
   }
 
   // Returns the total number of vampires that exist
