@@ -46,14 +46,19 @@ class Vampire {
 
   // Returns the vampire object with that name, or null if no vampire exists with that name
   vampireWithName(name) {
-    // base condition
+    // console.log(this.offspring.map(x => x.name));
+
+    if (this.name === name) {
+      return this;
+    }
+
     for (let child of this.offspring) {
       if (child.name === name) {
         return child;
-      } else {
-        return child.vampireWithName(name);
       }
+      return child.vampireWithName(name);
     }
+
     return null;
   }
 
