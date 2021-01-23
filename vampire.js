@@ -54,9 +54,7 @@ class Vampire {
       // console.log(`'${this.name}' has no child`);
       return null;
     }
-
     let target = null;
-
     for (let child of this.offspring) {
       if (child.name === name) {
         // console.log(`found ${child.name}`);
@@ -69,8 +67,6 @@ class Vampire {
         }
       }
     }
-
-
     return target;
   }
 
@@ -88,7 +84,24 @@ class Vampire {
 
   // Returns an array of all the vampires that were converted after 1980
   get allMillennialVampires() {
-    
+    let output = [];
+
+    for (let child of this.offspring) {
+      if (child.yearConverted > 1980) {
+        output.push(child);
+      }
+
+      if (child.offspring.length) {
+        const millenial = child.allMillennialVampires;
+        // console.log(millenial);
+        output = output.concat(millenial);
+        // console.log(output.map(x => x.name));
+        // console.log(child.allMillennialVampires.map(x => x.name));
+        
+      }
+    }
+    // console.log('end loop');
+    return output;
   }
 
   /** Stretch **/
