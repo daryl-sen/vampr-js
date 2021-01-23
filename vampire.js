@@ -112,24 +112,39 @@ class Vampire {
   // * when comparing Ansel and Sarah, Ansel is the closest common anscestor.
   // * when comparing Ansel and Andrew, Ansel is the closest common anscestor.
   closestCommonAncestor(vampire) {
-    // // create an array of all ancestors including themselves
+    // create an array of all ancestors including themselves
     
-    // let thisVampAncestors = [this];
-    // let thatVampAncestors = [vampire];
+    let thisVampAncestors = [this];
+    let thatVampAncestors = [vampire];
 
-    // console.log('thisvamp (initial)', thisVampAncestors);
-    // console.log('thatvamp (initial)', thatVampAncestors);
+    console.log('thisvamp (initial)', thisVampAncestors.map(x => x.name));
+    console.log('thatvamp (initial)', thatVampAncestors.map(x => x.name));
 
-    // for (let vamp of [this, vampire]) {
-    //   let currentVamp = vamp;
-    //   while (currentVamp.creator) {
-    //     thisVampAncestors.push(currentVamp.creator);
-    //     currentVamp = currentVamp.creator;
-    //   }
-    // }
+    console.log("---------------");
 
-    // console.log('thisvamp', thisVampAncestors.map(x => x.name));
-    // console.log('thatvamp', thatVampAncestors.map(x => x.name));
+    let currentVamp = this;
+    while (currentVamp.creator) {
+      thisVampAncestors.push(currentVamp.creator);
+      currentVamp = currentVamp.creator;
+    }
+
+    currentVamp = vampire;
+    while (currentVamp.creator) {
+      thatVampAncestors.push(currentVamp.creator);
+      currentVamp = currentVamp.creator;
+    }
+
+    for (let vamp of thisVampAncestors) {
+      for (let otherVamp of thatVampAncestors) {
+        if (vamp.name === otherVamp.name) {
+          return vamp;
+        }
+      }
+    }
+    return false;
+
+    console.log('thisvamp', thisVampAncestors.map(x => x.name));
+    console.log('thatvamp', thatVampAncestors.map(x => x.name));
     // console.log(vampire);
   }
 }
