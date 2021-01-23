@@ -46,21 +46,16 @@ class Vampire {
 
   // Returns the vampire object with that name, or null if no vampire exists with that name
   vampireWithName(name) {
-    // console.log('searching for ', name);
     if (this.name === name) {
       return this;
-    } 
-    else if (this.offspring.length === 0) {
-      // console.log(`'${this.name}' has no child`);
+    } else if (this.offspring.length === 0) {
       return null;
     }
     let target = null;
     for (let child of this.offspring) {
       if (child.name === name) {
-        // console.log(`found ${child.name}`);
         return child;
       } else {
-        // console.log(`'${this.name}' has no child named '${name}'`);
         target = child.vampireWithName(name);
         if (target) {
           return target;
@@ -93,14 +88,10 @@ class Vampire {
 
       if (child.offspring.length) {
         const millenial = child.allMillennialVampires;
-        // console.log(millenial);
         output = output.concat(millenial);
-        // console.log(output.map(x => x.name));
-        // console.log(child.allMillennialVampires.map(x => x.name));
         
       }
     }
-    // console.log('end loop');
     return output;
   }
 
@@ -117,10 +108,7 @@ class Vampire {
     let thisVampAncestors = [this];
     let thatVampAncestors = [vampire];
 
-    console.log('thisvamp (initial)', thisVampAncestors.map(x => x.name));
-    console.log('thatvamp (initial)', thatVampAncestors.map(x => x.name));
 
-    console.log("---------------");
 
     let currentVamp = this;
     while (currentVamp.creator) {
@@ -143,9 +131,6 @@ class Vampire {
     }
     return false;
 
-    console.log('thisvamp', thisVampAncestors.map(x => x.name));
-    console.log('thatvamp', thatVampAncestors.map(x => x.name));
-    // console.log(vampire);
   }
 }
 
